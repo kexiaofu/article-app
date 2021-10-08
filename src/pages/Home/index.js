@@ -6,21 +6,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import ReserveRecords from '../ReserveRecords';
 import PageRecords from '../PageRecords';
 import Sundry from '../Sundry';
+import StarPageList from '../StarPageList';
 
 const Home: () => Node = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator>
-        <Tab.Screen 
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="file-clock" color={color} size={size} />
-            ),
-            title: "预收藏",
-          }} 
-          name="ReserveRecords" 
-          component={ReserveRecords} 
-        />
         <Tab.Screen 
           options={{
             tabBarIcon: ({ color, size }) => (
@@ -30,6 +21,16 @@ const Home: () => Node = () => {
           }} 
           name="PageRecords" 
           component={PageRecords} 
+        />
+        <Tab.Screen 
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="star" color={color} size={size} />
+            ),
+            title: "收藏",
+          }} 
+          name="StarPageList" 
+          component={StarPageList} 
         />
         <Tab.Screen 
           options={{

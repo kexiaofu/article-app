@@ -17,6 +17,13 @@ export const reserveRecords = ({current = 0, size = 10}) => {
 export const getArticles = ({current = 0, size = 10}) => {
   console.log(current, size);
   return fetchFn({
-    url: `/pages/get-articles?current=${current}&size=${size}`
+    url: `/pages/get-articles?current=${current}&size=${size}`,
+  });
+};
+
+export const getStarArticles = ({current = 0, size = 10}) => {
+  console.log(current, size);
+  return fetchFn({
+    url: `/pages/get-articles?current=${current}&size=${size}&star=1`,
   });
 };
