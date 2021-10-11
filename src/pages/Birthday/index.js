@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {getBirthdayList} from '../../../apis/sundry';
-import CusFlatList from '../../../components/CusFlatList';
+import {getBirthdayList} from '../../apis/sundry';
+import CusFlatList from '../../components/CusFlatList';
 import {
   View,
   Text,
@@ -11,20 +11,18 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import dayjs from 'dayjs';
 
-const formatStr = str => str.replace('-', '月');
-
 const renderItem = ({item, navigation}) => {
   return (
     <TouchableWithoutFeedback
       key={item.id}
       onPress={() => navigation.navigate('BirthdayInfo', {...item})}>
       <View style={styles.recordItem}>
-        <Text>{item.name}</Text>
+        <Text>
+          {item.name}
+          {item.isSolar ? <Text style={styles.borderBox}>(新历)</Text> : null}
+        </Text>
         <Text>
           {dayjs(item.date).format('MM月DD日')}
-          {
-            item.isSolar ? <Text style={styles.borderBox}>(新历)</Text> : null
-          }
         </Text>
       </View>
     </TouchableWithoutFeedback>
@@ -53,28 +51,32 @@ function Birthday() {
       // Screen was focused
       // Do something
       getBirthdayListFn();
-      console.log('1234-->');
     });
 
     return unsubscribe;
   }, []);
 
   return (
-    <CusFlatList
-      refreshing={refreshing}
-      onRefresh={() => {
-        setRefreshing(true);
-        getBirthdayListFn();
-      }}
-      data={dates.sort((a, b) => new Date(a.date) - new Date(b.date))}
-      renderItem={({item}) => renderItem({item, navigation})}
-      keyExtractor={item => item.id}
-      isNoMorePage={true}
-    />
+    <View style={styles.container}>
+      <CusFlatList
+        refreshing={refreshing}
+        onRefresh={() => {
+          setRefreshing(true);
+          getBirthdayListFn();
+        }}
+        data={dates.sort((a, b) => new Date(a.date) - new Date(b.date))}
+        renderItem={({item}) => renderItem({item, navigation})}
+        keyExtractor={item => item.id}
+        isNoMorePage={true}
+      />
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+  },
   recordItem: {
     padding: 10,
     paddingHorizontal: 15,

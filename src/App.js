@@ -7,8 +7,11 @@ import {getPage} from './apis/pages';
 
 import Home from './pages/Home';
 import ArticleDetail from './pages/ArticleDetail';
-import Birthday from './pages/Sundry/Birthday';
-import BirthdayInfo from './pages/Sundry/Birthday/BirthdayInfo';
+import Birthday from './pages/Birthday';
+import BirthdayInfo from './pages/Birthday/BirthdayInfo';
+import ArticleWithSameLabel from './pages/ArticleWithSameLabel';
+import LabelList from './pages/LabelList';
+import LabelForArticle from './pages/LabelList/LabelForArticle';
 
 const getClipboardValue = async () => await Clipboard.getString();
 
@@ -55,7 +58,7 @@ const App: () => Node = () => {
         <Stack.Screen
           name="ArticleDetail"
           component={ArticleDetail}
-          options={{headerShown: false}}
+          options={{title: ''}}
         />
         <Stack.Screen
           name="Birthday"
@@ -66,6 +69,21 @@ const App: () => Node = () => {
           name="BirthdayInfo"
           component={BirthdayInfo}
           options={{title: '生日管理'}}
+        />
+        <Stack.Screen
+          name="LabelList"
+          component={LabelList}
+          options={{title: '标签管理'}}
+        />
+        <Stack.Screen
+          name="LabelForArticle"
+          component={LabelForArticle}
+          options={{title: '标签分配'}}
+        />
+        <Stack.Screen
+          name="ArticleWithSameLabel"
+          component={ArticleWithSameLabel}
+          options={{title: ''}}
         />
       </Stack.Navigator>
     </NavigationContainer>

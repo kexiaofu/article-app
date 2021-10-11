@@ -3,7 +3,6 @@ import type {Node} from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import ReserveRecords from '../ReserveRecords';
 import PageRecords from '../PageRecords';
 import Sundry from '../Sundry';
 import StarPageList from '../StarPageList';

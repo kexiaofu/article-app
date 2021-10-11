@@ -16,6 +16,7 @@ function CusFlatList({
   onRefresh,
   refreshing,
   style,
+  isWithFooter = true,
 }) {
   return (
     <FlatList
@@ -26,11 +27,18 @@ function CusFlatList({
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       onEndReached={onEndReached}
-      ListFooterComponent={ListFooterComponent || (() => isNoMorePage ? (
-        <View style={{paddingVertical: 10,}}>
-          <Text style={{textAlign: 'center', color: '#999999'}}>{noMorePageTips || '没有更多数据了...'}</Text>
-        </View> 
-      ) : null)}
+      ListFooterComponent={
+        isWithFooter
+          ? ListFooterComponent ||
+            (() =>
+              isNoMorePage ?
+              (
+                <View style={{paddingVertical: 10,}}>
+                  <Text style={{textAlign: 'center', color: '#999999'}}>{noMorePageTips || '没有更多数据了...'}</Text>
+                </View>
+              ) : null)
+          : null
+        }
     />
   )
 }

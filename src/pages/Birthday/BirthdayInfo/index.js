@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import DatePicker from 'react-native-datepicker';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
   Button,
   ToastAndroid,
 } from 'react-native';
-import {addDate, delDate, updateDate} from '../../../../apis/sundry';
+import {addDate, delDate, updateDate} from '../../../apis/sundry';
 
 const emptyArray = [null, undefined, ''];
 
@@ -55,15 +55,22 @@ function BirthdayInfo() {
   const [isSolar, setIsSolar] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const {params} = useRoute();
+  const navigation = useNavigation();
   useEffect(() => {
-    console.log(params);
-    const { name, isSolar, remark, date, isUpdate } = params || {};
+    const { name, isSolar, remark, date } = params || {};
     if (name) {
       setName(name);
       setIsSolar(isSolar);
       setRemark(remark);
       setDate(date);
       setIsUpdate(true);
+      navigation.setOptions({
+        title: `${name}生日`,
+      });
+    } else {
+      navigation.setOptions({
+        title: '添加生日提醒',
+      });
     }
   }, [params]);
 

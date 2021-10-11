@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import {getBirthdayList} from '../../apis/sundry';
+import React from 'react';
 import CusFlatList from '../../components/CusFlatList';
 import {
   View,
@@ -14,7 +13,7 @@ const renderItem = ({item, navigation}) => {
   return (
     <TouchableWithoutFeedback 
       key={item.id}
-      onPress={() => navigation.navigate('Birthday')}>
+      onPress={() => navigation.navigate(item.path)}>
       <View style={styles.recordItem}>
         <Text>
           {item.icon}
@@ -33,18 +32,26 @@ function Sundry() {
   const data = [
     {
       name: '生日管理',
-      path: '/Birthday',
+      path: 'Birthday',
       icon: <MaterialCommunityIcons name="cake-variant" size={18} color="#0066ee" /> ,
-    }
+    },
+    {
+      name: '标签管理',
+      path: 'LabelList',
+      icon: <MaterialCommunityIcons name="label" size={18} color="#0066ee" /> ,
+    },
   ];
 
   return (
-    <CusFlatList
-      data={data}
-      renderItem={({item}) => renderItem({item, navigation})}
-      keyExtractor={item => item.path}
-      isNoMorePage={true}
-    />
+    <View style={styles.container}>
+      <CusFlatList
+        data={data}
+        renderItem={({item}) => renderItem({item, navigation})}
+        keyExtractor={item => item.path}
+        isNoMorePage={true}
+        isWithFooter={false}
+      />
+    </View>
   )
 }
 
@@ -64,6 +71,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginHorizontal: 10,
   },
+  container: {
+    marginTop: 10,
+  }
 })
 
 export default Sundry;

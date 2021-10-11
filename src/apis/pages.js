@@ -14,16 +14,28 @@ export const reserveRecords = ({current = 0, size = 10}) => {
   });
 };
 
-export const getArticles = ({current = 0, size = 10}) => {
-  console.log(current, size);
+export const getArticles = ({current = 0, size = 10, ...params}) => {
+  let str = '';
+  if (params) {
+    str = Object.keys(params).map(k => `&${k}=${params[k]}`).join('');
+  }
   return fetchFn({
-    url: `/pages/get-articles?current=${current}&size=${size}`,
+    url: `/pages/get-articles?current=${current}&size=${size}${str}`,
   });
 };
 
-export const getStarArticles = ({current = 0, size = 10}) => {
-  console.log(current, size);
+export const starArticle = ({page_id}) => {
   return fetchFn({
-    url: `/pages/get-articles?current=${current}&size=${size}&star=1`,
+    url: '/pages/star',
+    method: 'POST',
+    data: {page_id},
+  });
+};
+
+export const addLabel = ({page_id, label_id}) => {
+  return fetchFn({
+    url: '/pages/add-label',
+    method: 'POST',
+    data: {page_id, label_id},
   });
 };
