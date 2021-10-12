@@ -15,7 +15,8 @@ import LabelForArticle from './pages/LabelList/LabelForArticle';
 
 const getClipboardValue = async () => await Clipboard.getString();
 
-const wechatArticleUrlReg = /^https:\/\/mp.weixin.qq.com\/s/;
+const articleUrlReg =
+  /^https:\/\/(mp.weixin.qq.com\/s|segmentfault.com\/a|zhuanlan.zhihu.com\/p).*/img;
 
 const App: () => Node = () => {
   const Stack = createNativeStackNavigator();
@@ -38,7 +39,7 @@ const App: () => Node = () => {
   }, [isActive]);
 
   useEffect(() => {
-    if (wechatArticleUrlReg.test(clipboardValue)) {
+    if (articleUrlReg.test(clipboardValue)) {
       ToastAndroid.showWithGravity('请求接口中', 2, ToastAndroid.CENTER);
       getPage(clipboardValue).then((responseJson) => {
         ToastAndroid.showWithGravity(responseJson.msg, 2, ToastAndroid.CENTER);

@@ -25,7 +25,13 @@ const labelView = (page_id, label_id, labels, navigation) => {
     )
   }
   return null;
-}
+};
+
+const sourceTarget = {
+  wechat: '微信',
+  zhihu: '知乎',
+  segmentfault: '思否',
+};
 
 const ArticleItem = ({item, navigation, starArticleFn, labels = {}}) => {
   if (item) {
@@ -63,9 +69,20 @@ const ArticleItem = ({item, navigation, starArticleFn, labels = {}}) => {
         </TouchableWithoutFeedback>
         <View style={styles.footer}>
           <MaterialCommunityIcons name="heart" size={20} color={item.star ? '#ec3972' : '#dedede'} onPress={() => starArticleFn(item.page_id)} />
-          <TouchableWithoutFeedback onPress={() => navigation.navigate('ArticleWithSameLabel', {date: dateStr})}>
-            <Text>{dateStr}</Text>
-          </TouchableWithoutFeedback>
+          <Text>
+            <TouchableWithoutFeedback
+              onPress={() =>
+                navigation.navigate('ArticleWithSameLabel', {
+                  source: item.source,
+                  __title__: sourceTarget[item.source] || item.source,
+                })
+              }>
+              <Text>{sourceTarget[item.source] || item.source}&nbsp;·&nbsp;</Text>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('ArticleWithSameLabel', {date: dateStr})}>
+              <Text>{dateStr}</Text>
+            </TouchableWithoutFeedback>
+          </Text>
         </View>
       </View>
     );

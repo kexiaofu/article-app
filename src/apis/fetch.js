@@ -1,5 +1,5 @@
-// export const BASE_URL = 'http://106.55.23.59:8091/api';
-export const BASE_URL = 'http://192.168.14.131:8091/api';
+export const BASE_URL = 'http://106.55.23.59:8091/api';
+// export const BASE_URL = 'http://192.168.14.131:8091/api';
 // export const BASE_URL = 'http://192.168.0.103:8091/api';
 
 export const fetchFn = ({url, method = 'GET', headers, data}) => {
