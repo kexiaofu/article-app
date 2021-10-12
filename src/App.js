@@ -16,7 +16,7 @@ import LabelForArticle from './pages/LabelList/LabelForArticle';
 const getClipboardValue = async () => await Clipboard.getString();
 
 const articleUrlReg =
-  /^https:\/\/(mp.weixin.qq.com\/s|segmentfault.com\/a|zhuanlan.zhihu.com\/p).*/img;
+  /^https:\/\/(mp.weixin.qq.com\/s|segmentfault.com\/a|zhuanlan.zhihu.com\/p|juejin.cn\/post).*/img;
 
 const App: () => Node = () => {
   const Stack = createNativeStackNavigator();
