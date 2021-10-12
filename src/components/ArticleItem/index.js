@@ -31,6 +31,7 @@ const sourceTarget = {
   wechat: '微信',
   zhihu: '知乎',
   segmentfault: '思否',
+  juejin: '掘金',
 };
 
 const ArticleItem = ({item, navigation, starArticleFn, labels = {}}) => {
