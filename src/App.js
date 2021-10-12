@@ -15,9 +15,6 @@ import LabelForArticle from './pages/LabelList/LabelForArticle';
 
 const getClipboardValue = async () => await Clipboard.getString();
 
-const articleUrlReg =
-  /^https:\/\/(mp.weixin.qq.com\/s|segmentfault.com\/a|zhuanlan.zhihu.com\/p|juejin.cn\/post).*/img;
-
 const App: () => Node = () => {
   const Stack = createNativeStackNavigator();
   const [clipboardValue, setClipboardValue] = useState('');
@@ -35,11 +32,12 @@ const App: () => Node = () => {
   }, []);
 
   useEffect(async () => {
-    setClipboardValue(await getClipboardValue());
+    const value = await getClipboardValue();
+    setClipboardValue(value);
   }, [isActive]);
 
   useEffect(() => {
-    if (articleUrlReg.test(clipboardValue)) {
+    if (/^https:\/\/(mp.weixin.qq.com\/s|segmentfault.com\/a|zhuanlan.zhihu.com\/p|juejin.cn\/post).*/img.test(clipboardValue)) {
       ToastAndroid.showWithGravity('请求接口中', 2, ToastAndroid.CENTER);
       getPage(clipboardValue).then((responseJson) => {
         ToastAndroid.showWithGravity(responseJson.msg, 2, ToastAndroid.CENTER);
