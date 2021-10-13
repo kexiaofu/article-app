@@ -10,6 +10,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import { getArticles, addLabel } from '../../../apis/pages';
 import { getLabelList } from '../../../apis/label';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CusFlatList from '../../../components/CusFlatList';
 
 const LabelForArticle = () => {
   const {params: {name, label_id}} = useRoute();
@@ -95,10 +96,16 @@ const LabelForArticle = () => {
 
   return (
     <View style={styles.viewItemContainer}>
+      <CusFlatList 
+        data={pages}
+        renderItem={({item}) => <ViewItem key={item.page_id} item={item} label_id={label_id} />}
+        keyExtractor={item => item.page_id}
+        isNoMorePage={true}
+      />
       {
-        pages.map(page => (
-          <ViewItem key={page.page_id} item={page} label_id={label_id} />
-        ))
+        // pages.map(page => (
+          
+        // ))
       }
     </View>
   )

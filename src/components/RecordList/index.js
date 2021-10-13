@@ -13,7 +13,7 @@ function RecordList({renderItem, getRecordApi = null, apiParams = {}}) {
   const [labels, setLabels] = useState({});
   const navigation = useNavigation();
 
-  useEffect(() => {
+  const getLabelListFn = () => {
     getLabelList().then(res => {
       if (res && res.data) {
         const labelsValue = {};
@@ -23,6 +23,10 @@ function RecordList({renderItem, getRecordApi = null, apiParams = {}}) {
         setLabels(labelsValue);
       }
     });
+  }
+
+  useEffect(() => {
+    getLabelListFn();
   }, []);
 
   const getMorePage = () => {
@@ -60,6 +64,7 @@ function RecordList({renderItem, getRecordApi = null, apiParams = {}}) {
           }
         }
       });
+      getLabelListFn();
     }
   };
 
