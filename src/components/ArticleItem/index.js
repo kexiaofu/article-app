@@ -54,7 +54,7 @@ const ArticleItem = ({item, navigation, starArticleFn, labels = {}}) => {
         </View>
         <TouchableWithoutFeedback
           key={item.page_id}
-          onPress={() => navigation.navigate('ArticleDetail',{page_id: item.page_id, title: item.title, star: item.star})}>
+          onPress={() => navigation.navigate('ArticleDetail',{page_id: item.page_id, title: item.title, star: item.star, originUrl: item.url})}>
           <View style={styles.recordItem}>
             <Text
               numberOfLines={1}
