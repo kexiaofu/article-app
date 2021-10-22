@@ -27,7 +27,7 @@ function Search() {
   return (
     <View style={styles.searchContainer}>
       <TextInputInARow
-        wrapperStyle={{marginVertical: 5, marginHorizontal: 10, }}
+        wrapperStyle={{marginHorizontal: 10, marginTop: 10,}}
         changeHandler={setQuery}
         buttonText="搜索"
         okEvent={search}
@@ -53,7 +53,7 @@ function Search() {
 
 const styles = StyleSheet.create({
   searchContainer: {
-    marginVertical: 5,
+    marginBottom: 80,
   },
 });
 

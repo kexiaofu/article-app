@@ -5,7 +5,9 @@ import {useRoute, useNavigation} from '@react-navigation/native';
 import {starArticle} from '../../apis/pages';
 
 function ArticleDerail() {
-  const {params: {page_id, title}} = useRoute();
+  const {
+    params: {page_id, title},
+  } = useRoute();
   const navigation = useNavigation();
   const [prevClickStamp, setPrevClickStamp] = useState(0);
   useEffect(() => {
