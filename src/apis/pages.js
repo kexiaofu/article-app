@@ -39,3 +39,11 @@ export const addLabel = ({page_id, label_id}) => {
     data: {page_id, label_id},
   });
 };
+
+export const searchPage = query => {
+  return fetchFn({
+    url: '/pages/search',
+    method: 'POST',
+    data: query,
+  });
+};

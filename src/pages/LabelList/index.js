@@ -13,6 +13,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import dayjs from 'dayjs';
+import TextInputInARow from '../../components/TextInputInARow';
 
 function LabelList() {
   const [name, setName] = useState('');
@@ -102,12 +103,12 @@ function LabelList() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.addItem}>
-        <TextInput value={name} onChangeText={setName} placeholder="请输入新增标签" style={{flex: 1, paddingHorizontal: 10,}} />
-        <TouchableWithoutFeedback onPress={addLabelFn}>
-          <Text style={{borderLeftWidth: .5, borderLeftColor: '#ddd', backgroundColor: '#fff', paddingHorizontal: 15, paddingVertical: 15}}>新增</Text>
-        </TouchableWithoutFeedback>
-      </View>
+      <TextInputInARow
+        changeHandler={setName}
+        buttonText="新增"
+        okEvent={addLabelFn}
+        placeholder="请输入新增标签"
+      />
       <CusFlatList
         refreshing={refreshing}
         onRefresh={() => {

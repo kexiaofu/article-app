@@ -96,19 +96,16 @@ const LabelForArticle = () => {
 
   return (
     <View style={styles.viewItemContainer}>
-      <CusFlatList 
+      <CusFlatList
         data={pages}
-        renderItem={({item}) => <ViewItem key={item.page_id} item={item} label_id={label_id} />}
+        renderItem={({item}) => (
+          <ViewItem key={item.page_id} item={item} label_id={label_id} />
+        )}
         keyExtractor={item => item.page_id}
         isNoMorePage={true}
       />
-      {
-        // pages.map(page => (
-          
-        // ))
-      }
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

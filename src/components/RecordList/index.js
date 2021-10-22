@@ -23,7 +23,7 @@ function RecordList({renderItem, getRecordApi = null, apiParams = {}}) {
         setLabels(labelsValue);
       }
     });
-  }
+  };
 
   useEffect(() => {
     getLabelListFn();

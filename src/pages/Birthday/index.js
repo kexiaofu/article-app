@@ -44,7 +44,11 @@ function Birthday() {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <MaterialCommunityIcons name="calendar-plus" size={24} onPress={() => navigation.navigate('BirthdayInfo')} />
+        <MaterialCommunityIcons
+          name="calendar-plus"
+          size={24}
+          onPress={() => navigation.navigate('BirthdayInfo')}
+        />
       ),
     });
     const unsubscribe = navigation.addListener('focus', () => {

@@ -12,6 +12,7 @@ import BirthdayInfo from './pages/Birthday/BirthdayInfo';
 import ArticleWithSameLabel from './pages/ArticleWithSameLabel';
 import LabelList from './pages/LabelList';
 import LabelForArticle from './pages/LabelList/LabelForArticle';
+import Search from './pages/Search';
 
 const getClipboardValue = async () => await Clipboard.getString();
 
@@ -83,6 +84,11 @@ const App: () => Node = () => {
           name="ArticleWithSameLabel"
           component={ArticleWithSameLabel}
           options={{title: ''}}
+        />
+        <Stack.Screen
+          name="Search"
+          component={Search}
+          options={{title: ' 搜索'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
