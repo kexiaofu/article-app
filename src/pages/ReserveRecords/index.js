@@ -38,7 +38,7 @@ const ReserveRecords = () => {
     reserveRecords(params).then(res => {
       setLoading(false);
       if (res.code === 2000) {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.length > 0) {
           const {current} = params;
           if (current !== 0) {

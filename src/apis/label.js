@@ -1,8 +1,8 @@
 import {fetchFn} from './fetch';
 
-export const getLabelList = () => {
+export const getLabelList = params => {
   return fetchFn({
-    url: '/label/label-list',
+    url: `/label/label-list?isComplete=${params ? params.isComplete : false}`,
   });
 };
 

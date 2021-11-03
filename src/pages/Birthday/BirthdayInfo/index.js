@@ -23,10 +23,10 @@ const isObjectHadEmptyValue = (data, exception = []) => {
 const updateBirthday = (data, isUpdate) => {
   const fn = isUpdate ? updateDate : addDate;
   const action = isUpdate ? '更新' : '新增';
-  console.log(data, !isObjectHadEmptyValue(data, ['remark', 'id']));
+  // console.log(data, !isObjectHadEmptyValue(data, ['remark', 'id']));
   if (!isObjectHadEmptyValue(data, ['remark', 'id'])) {
     fn(data).then(res => {
-      console.log(res);
+      // console.log(res);
       if (res.code === 2000) {
         ToastAndroid.show(`${action}成功`, ToastAndroid.SHORT);
       } else {

@@ -8,7 +8,7 @@ export const getPage = url => {
 };
 
 export const reserveRecords = ({current = 0, size = 10}) => {
-  console.log(current, size);
+  // // console.log(current, size);
   return fetchFn({
     url: `/pages/reserve-records?current=${current}&size=${size}`
   });

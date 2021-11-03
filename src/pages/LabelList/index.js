@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {getLabelList, addLabel, delLabel, updateLabel} from '../../apis/label';
+import {getLabelList, addLabel, delLabel} from '../../apis/label';
 import CusFlatList from '../../components/CusFlatList';
 import {
   View,
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
-  TextInput,
   ActivityIndicator,
   ToastAndroid,
 } from 'react-native';
@@ -22,7 +21,7 @@ function LabelList() {
   const navigation = useNavigation();
   const [delLabelList, setDelLabelList] = useState([]);
   const getLabelListFn = () => {
-    getLabelList().then(res => {
+    getLabelList({isComplete: true}).then(res => {
       if (res && res.code === 2000 && res.data) {
         setLabels(res.data);
         setRefreshing(false);
@@ -51,29 +50,16 @@ function LabelList() {
     });
   };
 
-  const updateLabelFn = (text, label_id, isUpdateNow = false) => {
-    const labelsClone = labels.map(l => {
-      if (l.label_id === label_id) {
-        return {...l, name: text};
-      }
-      return l;
-    });
-    setLabels(labelsClone);
-    if (isUpdateNow) {
-      updateLabel({name: text, label_id}).then(res => {
-        if (res && res.code === 2000) {
-          ToastAndroid.show(res.msg, ToastAndroid.SHORT);
-        }
-        getLabelListFn();
-      });
-    }
-  };
-
+// onChangeText={t => updateLabelFn(t, item.label_id)}
   const renderItem = ({item}) => {
     return (
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('LabelForArticle', {...item})}>
+      <TouchableWithoutFeedback
+        onPress={() => navigation.navigate('LabelForArticle', {...item})}>
         <View style={styles.recordItem}>
-          <TextInput value={item.name} onBlur={() => updateLabelFn(item.name, item.label_id, true)} onChangeText={t => updateLabelFn(t, item.label_id)} />
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate('UpdateLabel', {...item})}>
+            <Text>{item.name}</Text>
+          </TouchableWithoutFeedback>
           <Text>
             {dayjs(item.date).format('MM月DD日')}&nbsp;
             {delLabelList.indexOf(item.label_id) > -1 ? 
@@ -87,11 +73,6 @@ function LabelList() {
   };
 
   useEffect(() => {
-    // navigation.setOptions({
-    //   headerRight: () => (
-    //     <MaterialCommunityIcons name="calendar-plus" size={24} onPress={() => navigation.navigate('LabelListInfo')} />
-    //   ),
-    // });
     const unsubscribe = navigation.addListener('focus', () => {
       // Screen was focused
       // Do something
@@ -104,6 +85,7 @@ function LabelList() {
   return (
     <View style={styles.container}>
       <TextInputInARow
+        defaultValue={name}
         changeHandler={setName}
         buttonText="新增"
         okEvent={addLabelFn}
@@ -137,6 +119,7 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 10,
+    marginBottom: 75,
   },
   recordItem: {
     padding: 5,
@@ -148,6 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 48,
   },
   borderBox: {
     color: '#0066ee',

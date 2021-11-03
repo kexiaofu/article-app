@@ -49,7 +49,7 @@ function RecordList({renderItem, getRecordApi = null, apiParams = {}}) {
 
   const getRecordListApi = params => {
     if (typeof getRecordApi === 'function') {
-      console.log(apiParams, '---> apiParams')
+      // // console.log(apiParams, '---> apiParams')
       getRecordApi({...params, ...apiParams}).then(res => {
         setRefreshing(false);
         if (res && res.code === 2000) {

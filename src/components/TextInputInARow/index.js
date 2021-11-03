@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   TextInput,
@@ -15,12 +15,18 @@ function TextInputInARow({
   placeholder,
   buttonText,
   okEvent,
+  defaultValue,
 }) {
   const [value, setValue] = useState('');
   const changeEvent = text => {
     setValue(text);
     typeof changeHandler === 'function' && changeHandler(text);
   };
+  useEffect(() => {
+    if (value !== defaultValue) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue])
   return (
     <View style={{...styles.wrapper, ...(wrapperStyle || {})}}>
       <TextInput

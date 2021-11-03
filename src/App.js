@@ -13,6 +13,7 @@ import ArticleWithSameLabel from './pages/ArticleWithSameLabel';
 import LabelList from './pages/LabelList';
 import LabelForArticle from './pages/LabelList/LabelForArticle';
 import Search from './pages/Search';
+import UpdateLabel from './pages/LabelList/Update';
 
 const getClipboardValue = async () => await Clipboard.getString();
 
@@ -79,6 +80,11 @@ const App: () => Node = () => {
           name="LabelForArticle"
           component={LabelForArticle}
           options={{title: '标签分配'}}
+        />
+        <Stack.Screen
+          name="UpdateLabel"
+          component={UpdateLabel}
+          options={{title: '标签编辑'}}
         />
         <Stack.Screen
           name="ArticleWithSameLabel"
